@@ -1,0 +1,67 @@
+<div class=" w-full m-auto mt-5  sm:w-full  md:w-2/4 lg:w-1/3">
+    <input type="text" [(ngModel)]="searchTerm"  placeholder="Search..."  
+    class="bg-white h-10 px-5 w-full  rounded-full text-lg focus:outline-none"/>
+</div>
+
+<section class=" px-5 py-10 lg:flex lg:items-center lg:justify-between sm:flex-wrap ">
+    
+    <div class="border rounded-md border-orange-500 sm:mb-10 ">
+        <table class="min-w-full divide-y  divide-orange-200">
+            <thead class="bg-orange-100 ">
+                <tr>
+                    <th scope="col" class="py-3.5 px-4 text-sm font-normal text-center text-gray-700 "> 
+                        ID
+                    </th>
+
+                    
+
+                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-700 ">
+                        Customer
+                    </th>
+
+                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-700 ">
+                    Customer Amount
+                    </th>
+
+                    
+                    <th scope="col" class="px-4 py-3.5 text-sm font-normal text-center text-gray-700 ">
+                        Transactions Details
+                    </th>
+                  </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-orange-200 ">
+                @for(customer of allCustomerData | filter : searchTerm; track customer.id){
+                    
+                    <tr (click)="openGraph(customer.id)" class="text-center">
+                        <td class="px-4 py-4 text-sm font-medium text-orange-700  whitespace-nowrap">
+                            {{customer.id}}
+                        </td>
+                        
+                        <td class="px-4 py-4 text-sm text-gray-600 whitespace-nowrap">
+                            {{customer.name}}
+                        </td>
+                        <td class="px-4 py-4 text-sm text-gray-600 text-center whitespace-nowrap">
+                            @for(transaction of customer.transactions;track transaction.id){
+                                <span>{{transaction.amount}}</span><br/>
+                            }
+                    </td>
+                    
+                    <td class="px-4 py-4 text-sm text-orange-600 text-center   whitespace-nowrap">
+                        <i class="fa-solid fa-chart-simple text-3xl" ></i>
+                    </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+    
+    @if(selectCustomer){
+        <div class="graph  w-1/3 sm:w-2/4 my-16 sm:m-auto">
+            <app-charting #chart [selectCustomer]="selectCustomer" />
+        </div>
+    }@else{
+        <p class="text-orange-500 text-2xl mr-32 sm:text-center">Show Customers Transactions Details<span class="text-sm text-gray-400">Double Click...</span></p>
+    }
+    
+</section>
