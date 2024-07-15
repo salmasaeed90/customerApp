@@ -31,8 +31,8 @@
             </thead>
             <tbody class="bg-white divide-y divide-orange-200 ">
                 @for(customer of allCustomerData | filter : searchTerm; track customer.id){
-                    
-                    <tr (click)="openGraph(customer.id)" class="text-center">
+                    <!--  -->
+                    <tr (click)="openGraph(customer.id)"  class="text-center">
                         <td class="px-4 py-4 text-sm font-medium text-orange-700  whitespace-nowrap">
                             {{customer.id}}
                         </td>
@@ -62,6 +62,6 @@
         </div>
     }@else{
         <p class="text-orange-500 text-2xl mr-32 sm:text-center">Show Customers Transactions Details<span class="text-sm text-gray-400">Double Click...</span></p>
-    }
+    } 
     
 </section>

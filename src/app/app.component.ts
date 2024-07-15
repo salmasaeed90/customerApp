@@ -15,7 +15,7 @@ import { FilterPipe } from './filter.pipe';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  allCustomers:Customer[]=[];
+  allCustomers:any[]=[];
   allCustomersTransactions:Transactions[]=[];
 
 
@@ -42,8 +42,8 @@ export class AppComponent {
   displayCustomersData(){
     this._CustomersService.getAllCustomers().subscribe({
       next:(response)=>{
-        //console.log(response);
-        this.allCustomers = response;
+        console.log(response);
+        this.allCustomers = response.customers;
         this.mergeAllCustomersData();
       }
     })
@@ -52,8 +52,8 @@ export class AppComponent {
   displayTransactions(){
     this._CustomersService.getAllCustomersTransactions().subscribe({
       next:(data)=>{
-        //console.log(data);
-        this.allCustomersTransactions = data;
+        console.log(data);
+        this.allCustomersTransactions = data.transactions;
         this.mergeAllCustomersData();
       }
     })
@@ -67,7 +67,7 @@ export class AppComponent {
       }
     })
     this.allCustomerData = allData;
-    //console.log(this.allCustomerData);
+    console.log(this.allCustomerData);
   }
 
   openGraph(id:any){

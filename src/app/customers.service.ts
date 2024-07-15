@@ -7,14 +7,17 @@ import { map, Observable } from 'rxjs';
 })
 export class CustomersService {
   
- 
+ urlCustomers='https://salmasaeed90.github.io/customer-json-server/db.json';
+  urlTransactions='https://salmasaeed90.github.io/transactions-server/db-transactions.json'
   constructor(private _HttpClient:HttpClient) { }
 
   getAllCustomers():Observable<any>{
-    return this._HttpClient.get( `http://localhost:3000/customers`)
+    return this._HttpClient.get(this.urlCustomers)
   }
 
   getAllCustomersTransactions():Observable<any>{
-    return this._HttpClient.get( `http://localhost:3000/transactions`)
+    return this._HttpClient.get( this.urlTransactions)
   }
 }
+// `http://localhost:3000/customers`
+//`http://localhost:3000/transactions`
